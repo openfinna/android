@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021 OpenFinna Organization. All rights reserved.
+  ~ @author Developer From Jokela
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="org.openfinna.android.ui.main.fragments.HomepageFragment"
+        android:label="@string/etusivu"
+        tools:layout="@layout/fragment_homepage" />
+
+    <fragment
+        android:id="@+id/navigation_reservations"
+        android:name="org.openfinna.android.ui.main.fragments.ReservationsFragment"
+        android:label="@string/reservations"
+        tools:layout="@layout/fragment_reservations" />
+
+    <fragment
+        android:id="@+id/navigation_orders"
+        android:name="org.openfinna.android.ui.main.fragments.PickupBooksFragment"
+        android:label="@string/booked_orders"
+        tools:layout="@layout/fragment_orders" />
+
+    <fragment
+        android:id="@+id/navigation_libinfo"
+        android:name="org.openfinna.android.ui.main.fragments.LibraryInfoFragment"
+        android:label="@string/libraries"
+        tools:layout="@layout/fragment_libinfo" />
+
+    <fragment
+        android:id="@+id/navigation_libcard"
+        android:name="org.openfinna.android.ui.main.fragments.LibraryCardFragment"
+        android:label="@string/library_card"
+        tools:layout="@layout/fragment_libcard" />
+
+
+</navigation>

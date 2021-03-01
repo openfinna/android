@@ -1,0 +1,170 @@
+<!--
+  ~ Copyright (c) 2021 OpenFinna Organization. All rights reserved.
+  ~ @author Developer From Jokela
+  -->
+
+<resources>
+    <string name="app_name">OpenFinna</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Library Card number</string>
+    <string name="prompt_password">Pin-code</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="title_activity_login">Login</string>
+    <string name="email_error">Library card number should not be empty!</string>
+    <string name="email_error_3">This library card number doesn\'t exist</string>
+    <string name="invalid_password_2">Pin-code is invalid</string>
+    <string name="title_activity_main" translatable="false">OpenFinna</string>
+    <string name="error_occurred">Error occurred</string>
+    <string name="hint_refresh">Swipe down from top to refresh</string>
+    <string name="etusivu">Homepage</string>
+    <string name="reservations">Loans</string>
+    <string name="wrong_creds">Wrong credentials. Check your pin-code and library card number and try again.</string>
+    <string name="return_day">Return day: %1$s</string>
+    <string name="your_profile">Change profile</string>
+    <string name="other_accounts">Other library cards</string>
+    <string name="add_card">New library card</string>
+    <string name="last_pickup_day">Last pickup date: %1$s</string>
+    <string name="content_type">Media type: %1$s</string>
+    <string name="booked_orders">Holds</string>
+    <string name="ready_for_pickup">Ready to pickup</string>
+    <string name="order_date">Hold placed at: %1$s</string>
+    <string name="e_card_details">Use this barcode as your library card.</string>
+    <string name="library_card">Library card</string>
+    <string name="title_activity_book_info">Loading</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="loading">Loading details</string>
+    <string name="loading_fees">Loading fees</string>
+    <string name="search_books">Search books</string>
+    <string name="title_activity_search">Search</string>
+    <string name="searching">Searching from 100000 different books</string>
+    <string name="reserve">Reserve</string>
+    <string name="title_activity_reserve">Reserve</string>
+    <string name="loading_pickup_locations">Loading pickup locations</string>
+    <string name="reservation_type">Loan type</string>
+    <string name="pickup_location">Pickup location</string>
+    <string name="reserved">Your book is reserved</string>
+    <string name="cancel_reservation">Cancel</string>
+    <string name="cancel_reservation_full">Cancel the reservation</string>
+    <string name="cancel_disclaimer">Do you want to cancel this hold? There\'s no guarantee for holding it again. Do you want to continue?</string>
+    <string name="canceling_reservation">Canceling hold. Please wait…</string>
+    <string name="renewing_please_wait">Renewing %1$s, please wait</string>
+    <string name="renew_done">Book renewed</string>
+    <string name="all_set">All set</string>
+    <string name="all_right">New notifications will appear here</string>
+    <string name="libraries">Libraries</string>
+    <string name="change_lib_card">Change library card</string>
+    <string name="barcode">Barcode</string>
+    <string name="avatar">Avatar</string>
+    <string name="renew">Renew</string>
+    <string name="book_cover">Book Cover</string>
+    <string name="icon">Icon</string>
+    <string name="lib_open">Open</string>
+    <string name="lib_closed">Closed</string>
+    <string name="lib_open_times" translatable="false">%1$s-%2$s</string>
+    <string name="add_library">Set your local library</string>
+    <string name="add_library_desc">You can receive updates and opening times about your local library</string>
+    <string name="set_library">Set library</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="select_library">Select library</string>
+    <string name="cancel">Cancel</string>
+    <string name="book_pickup_available">Pickup available</string>
+    <string name="book_pickup_available_details"><![CDATA[%1$s is ready to pickup at the library. <br><b>Last pickup date: %2$s</b>]]></string>
+    <string name="book_details">Details</string>
+    <string name="book_expire_soon">Book loan expiring soon</string>
+    <string name="book_expire_soon_details">%1$s will expire in %2$s days. Renew it if possible, or return it to the library</string>
+    <string name="book_expired">Book expired</string>
+    <string name="book_expired_details">%1$s expired, and is late for %2$s days. Renew or return the book as fast as possible to avoid charges.</string>
+    <string name="library_open_times_oncard">Open today: %1$s-%2$s</string>
+    <string name="library_open_times_on_tomorrow_card">Open tomorrow %1$s-%2$s</string>
+    <string name="scan_libcard">Add library card by scanning</string>
+    <string name="scan_libcard_hint">Look at your library card\'s back side. There should be an barcode. Scan it to continue</string>
+    <string name="delete_card">Remove library card</string>
+    <string name="delete_card_desc">Are you sure to delete %1$s library card?</string>
+    <string name="contact_developer">Email to the developer</string>
+    <string name="title_activity_about_screen">About this app</string>
+    <string name="report">Report</string>
+    <string name="no_email_app">No email clients found on your device to report</string>
+    <string name="user_list_failed">Error occurred while displaying library cards</string>
+    <string name="expiration_day">Expires in %1$s</string>
+    <string name="waiting_for_transport">Waiting to be transported</string>
+    <string name="in_transit">In transit</string>
+    <string name="available">Available for pickup</string>
+    <string name="reservation_refresh_failed">Loans refreshing failed: %1$s</string>
+    <string name="holds_refresh_failed">Holds refreshing failed: %1$s</string>
+    <string name="failed">Unexpected error happened</string>
+    <string name="no_description">Description is not available</string>
+    <string name="description">Description</string>
+    <string name="authors">Authors</string>
+    <string name="publisher">Publisher</string>
+    <string name="book_title">Title</string>
+    <string name="published">Published</string>
+    <string name="call_numbers">Shelf number</string>
+    <string name="isbn">ISBN</string>
+    <string name="not_available">Not available</string>
+    <string name="author">Author</string>
+    <string name="copied_to_clipboard">%1$s copied to clipboard</string>
+    <string name="published_date_text">Publication date</string>
+    <string name="search_tag">Search using tag</string>
+    <string name="search_tag_desc">Do you want to search items using %1$s?</string>
+    <string name="search">Search</string>
+    <string name="tags">Tags</string>
+    <string name="content_type_text">Media type</string>
+    <string name="reservation_num">Reservation Number: %1$s</string>
+    <string name="renew_count" translatable="false">%1$s/%2$s</string>
+    <string name="no_fees">No fees</string>
+    <string name="no_fees_desc">You don\'t have any fees to pay. You\'re good to go</string>
+    <string name="total_payment">Total amount: %1$s</string>
+    <string name="payable_amount_payment">Payable amount: %1$s</string>
+    <string name="error_occurred_short">Error occurred</string>
+    <string name="fees">Fines</string>
+    <string name="money_emoji" translatable="false">💸</string>
+    <string name="fees_list_name">Fees:</string>
+    <string name="no_orders">You don\'t have loans</string>
+    <string name="no_orders_desc">Start reserving books by searching them to get loans here</string>
+
+    <string name="no_reservations">You don\'t have holds</string>
+    <string name="no_reservations_desc">Start holding books by searching them</string>
+    <string name="queue">Queue: %1$s</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="pickup_location_empty">Pickup location should be selected</string>
+    <string name="hold_saved">Hold saved</string>
+    <string name="pickup_location_entry_hold">Pickup location: %1$s</string>
+    <string name="and">and</string>
+    <string name="logout">Sign out</string>
+    <string name="logout_disclaimer">Are you sure to sign out?</string>
+    <string name="language">Language</string>
+    <string name="full_name">Full name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="address">Address</string>
+    <string name="zipcode">Zip-code</string>
+    <string name="city">City</string>
+    <string name="phone">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="lib_preferences">Library settings</string>
+    <string name="kirkes_preferences">Finna settings</string>
+    <string name="nickname">Nickname</string>
+    <string name="default_lib">Default pickup library</string>
+    <string name="change">Change</string>
+    <string name="loading_settings">Loading settings</string>
+    <string name="default_lib_changed">Default pickup location changed</string>
+    <string name="settings">Settings</string>
+    <string name="holds_chname">Holds status change</string>
+    <string name="holds_chdesc">You will be notified if hold\'s status changes</string>
+    <string name="loans_chname">Loans</string>
+    <string name="loans_chdesc">You will be notified for loans that are expiring in 10 days and if any loans already expired</string>
+    <string name="loan_expired_notif">Loan expired</string>
+    <string name="loan_expired_msg">%1$s loan is expired. Return as soon as possible to avoid fees</string>
+    <string name="loan_expiration_soon_notif">Loan expiring soon</string>
+    <string name="loan_expiration_soon_msg">"%1$s is expiring in %2$s %3$s. Fees can be charged if not returned in time "</string>
+    <string name="day">day</string>
+    <string name="days">days</string>
+    <string name="hold_status_change_msg">New status: %1$s</string>
+    <string name="hold_status_change">Status changed for %1$s</string>
+    <string name="app_settings">Application settings</string>
+    <string name="invalid_username_pass">Invalid library card number or password</string>
+
+
+</resources>

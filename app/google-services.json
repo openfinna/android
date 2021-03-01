@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "784345285281",
+    "project_id": "openfinna",
+    "storage_bucket": "openfinna.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784345285281:android:f9d0e6d89ff21f394266e0",
+        "android_client_info": {
+          "package_name": "org.openfinna.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784345285281-3os0o40odfvl5cc1jrf9nc5vfp2va6fu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA29YcN1De2600CfABfX07JHk73x5-SrxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784345285281-3os0o40odfvl5cc1jrf9nc5vfp2va6fu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

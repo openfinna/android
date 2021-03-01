@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021 OpenFinna Organization. All rights reserved.
+  ~ @author Developer From Jokela
+  -->
+
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/ubuntu</item>
+    </array>
+</resources>

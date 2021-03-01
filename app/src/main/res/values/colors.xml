@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021 OpenFinna Organization. All rights reserved.
+  ~ @author Developer From Jokela
+  -->
+
+<resources>
+    <color name="colorPrimary">#C60303</color>
+    <color name="colorPrimaryDark">#710F0F</color>
+    <color name="colorAccent">#000000</color>
+    <color name="green_available">#052E93</color>
+</resources>

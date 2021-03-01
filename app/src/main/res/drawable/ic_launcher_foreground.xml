@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021 OpenFinna Organization. All rights reserved.
+  ~ @author Developer From Jokela
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="444.0581"
+    android:tint="#FFFFFF"
+    android:viewportHeight="444.0581">
+    <group
+        android:translateX="176.52905"
+        android:translateY="139.30103">
+        <group android:translateY="134.20805">
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M87,-100Q81.859375,-94.828125,76.07031,-89.02344Q70.28125,-83.21875,64.10156,-77.015625Q57.921875,-70.8125,51.882812,-64.75Q45.84375,-58.6875,40.5625,-53.390625Q46.84375,-49.046875,53.851562,-42.679688Q60.859375,-36.3125,67.57031,-29.078125Q74.28125,-21.84375,80.19531,-14.3203125Q86.109375,-6.796875,90,-0L73.109375,-0Q68.78125,-6.859375,63.140625,-13.7890625Q57.5,-20.71875,51.21875,-27.0625Q44.9375,-33.40625,38.5,-38.804688Q32.0625,-44.203125,26,-48L26,-0L12,-0L12,-100L26,-100L26,-56Q30.921875,-60.953125,37.023438,-66.875Q43.125,-72.796875,49.078125,-78.796875Q55.03125,-84.796875,60.335938,-90.28906Q65.640625,-95.78125,69.84375,-100L87,-100Z" />
+        </group>
+    </group>
+</vector>
