@@ -102,7 +102,7 @@ public class ReserveActivity extends KirkesActivity implements PickupLocationsIn
                 fetchReservationDetails(bookInfo.getId());
             } catch (Exception e) {
                 e.printStackTrace();
-                ErrorViewUtils.setError(e.getMessage(), error);
+                ReserveActivity.this.onError(e);
             }
         } else
             finish();

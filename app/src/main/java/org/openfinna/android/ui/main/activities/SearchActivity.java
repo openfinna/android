@@ -122,7 +122,7 @@ public class SearchActivity extends KirkesActivity implements SearchInterface, B
     @Override
     public void onBookClick(ResourceInfo book) {
         Intent intent = new Intent(this, BookInfoActivity.class);
-        intent.putExtra("resource", book);
+        intent.putExtra("resourceInfo", book);
         startActivity(intent);
     }
 

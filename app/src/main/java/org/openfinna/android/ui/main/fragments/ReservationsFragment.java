@@ -135,7 +135,7 @@ public class ReservationsFragment extends KirkesFragment implements LoansInterfa
     @Override
     public void onLoanClick(Loan book) {
         Intent intent = new Intent(getContext(), BookInfoActivity.class);
-        intent.putExtra("book_id", book.getId());
+        intent.putExtra("resourceId", book.getId());
         startActivity(intent);
     }
 

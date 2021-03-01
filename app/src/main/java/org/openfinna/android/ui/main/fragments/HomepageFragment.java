@@ -371,7 +371,7 @@ public class HomepageFragment extends KirkesFragment implements HomepageNotifica
         if (actionID.equals("act_bk_details")) {
             Intent intent = new Intent(getContext(), BookInfoActivity.class);
             ResourceInfo book = (ResourceInfo) card.getPayload();
-            intent.putExtra("resource", book);
+            intent.putExtra("resourceInfo", book);
             startActivity(intent);
         }
         if (actionID.equals("act_dismiss_addlib")) {

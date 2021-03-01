@@ -26,6 +26,7 @@ import org.openfinna.android.ui.main.fragments.infotabs.InformationTab;
 import org.openfinna.android.ui.main.fragments.infotabs.TagsTab;
 import org.openfinna.android.ui.utils.ErrorViewUtils;
 import org.openfinna.java.connector.classes.ResourceInfo;
+import org.openfinna.java.connector.classes.models.Resource;
 import org.openfinna.java.connector.interfaces.ResourceInfoInterface;
 
 public class BookInfoActivity extends KirkesActivity implements ResourceInfoInterface {
@@ -53,6 +54,7 @@ public class BookInfoActivity extends KirkesActivity implements ResourceInfoInte
             }
         });
         resourceInfo = (ResourceInfo) getIntent().getSerializableExtra("resourceInfo");
+        Resource resource = (Resource) getIntent().getSerializableExtra("resource");
         content = findViewById(R.id.content);
         progress = findViewById(R.id.progress);
         tabLayout = findViewById(R.id.tab_layout);
@@ -80,11 +82,12 @@ public class BookInfoActivity extends KirkesActivity implements ResourceInfoInte
                 if (resourceInfo == null) {
                     resourceId = getIntent().getStringExtra("resourceId");
 
+                } else if (resource != null) {
+                    resourceId = resource.getId();
                 } else {
                     resourceId = resourceInfo.getId();
                 }
                 Log.e("RID", "RID: " + resourceId);
-                LoginUser user = null;
                 finnaClient.resourceInfo(resourceId, BookInfoActivity.this);
             }
         });
