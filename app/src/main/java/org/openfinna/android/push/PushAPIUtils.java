@@ -1,9 +1,9 @@
 /*
- * Copyright (c) 2020 Kirkes Mobile.  All Rights Reserved
- *  @author developerfromjokela
+ * Copyright (c) 2021 OpenFinna Organization. All rights reserved.
+ * @author Developer From Jokela
  */
 
-package org.openfinna.android.ui.push;
+package org.openfinna.android.push;
 
 import org.openfinna.android.BuildConfig;
 

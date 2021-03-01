@@ -3,7 +3,7 @@
  * @author Developer From Jokela
  */
 
-package org.openfinna.android.ui.push;
+package org.openfinna.android.push;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

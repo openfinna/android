@@ -37,7 +37,7 @@ import org.openfinna.android.classes.LoginUser;
 import org.openfinna.android.push.KirkesFCMPushService;
 import org.openfinna.android.ui.login.activities.LoginActivity;
 import org.openfinna.android.ui.main.adapters.LibraryCardsAdapter;
-import org.openfinna.android.ui.push.PushAPIUtils;
+import org.openfinna.android.push.PushAPIUtils;
 import org.openfinna.android.ui.utils.AuthUtils;
 import org.openfinna.android.ui.utils.GridSpacingItemDecoration;
 import org.openfinna.android.ui.utils.PriceUtils;
