@@ -8,7 +8,9 @@ package org.openfinna.android.ui.main.activities;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,13 +28,16 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.openfinna.android.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.openfinna.android.R;
 import org.openfinna.android.classes.LoginUser;
+import org.openfinna.android.push.KirkesFCMPushService;
 import org.openfinna.android.ui.login.activities.LoginActivity;
 import org.openfinna.android.ui.main.adapters.LibraryCardsAdapter;
+import org.openfinna.android.ui.push.PushAPIUtils;
 import org.openfinna.android.ui.utils.AuthUtils;
 import org.openfinna.android.ui.utils.GridSpacingItemDecoration;
 import org.openfinna.android.ui.utils.PriceUtils;
@@ -40,14 +45,7 @@ import org.openfinna.java.connector.classes.models.fines.Fines;
 import org.openfinna.java.connector.exceptions.KirkesClientException;
 import org.openfinna.java.connector.interfaces.FinesInterface;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.List;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 public class MainActivity extends KirkesActivity {
 
@@ -76,7 +74,7 @@ public class MainActivity extends KirkesActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
 
-        //sendPushToken();
+        sendPushToken();
 
     }
 
@@ -252,8 +250,34 @@ public class MainActivity extends KirkesActivity {
         });
     }
 
-    /*private void sendPushToken() {
+    private class PushTokenSend extends AsyncTask<String, String, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... homepageSavedResources) {
+            try {
+                String token = FirebaseInstanceId.getInstance().getToken(KirkesFCMPushService.SENDER_ID, "GCM");
+                Log.e(TAG, "Token: " + token);
+                PushAPIUtils.getAPIService().sendPushKey(token).execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
+    private void sendPushToken() {
         new PushTokenSend().execute();
-    }*/
+    }
 
 }
