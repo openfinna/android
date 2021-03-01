@@ -168,5 +168,12 @@
     <string name="awards">Awards</string>
     <string name="none">None</string>
     <string name="loan_renewed">Loan renewed</string>
-    <string name="loan_renewed_auto_msg">Laina %1$s uusittiin automaattisesti, koska sen eräpäivään oli jälellä %2$s %3$s.</string>
+    <string name="loan_renewed_auto_msg">Loan %1$s was automatically renewed, because only %2$s %3$s was left until its expiration date.</string>
+    <string name="comments">Comments</string>
+    <string name="part_issue">Part or issue</string>
+    <string name="part_hint">i.e Part 1</string>
+    <string name="comment_hint">i.e Stop at bus stop x</string>
+    <string name="alive_date">Required until</string>
+    <string name="requiredByDate">Click to select date</string>
+    <string name="invalid_date">Date cannot be in past!</string>
 </resources>

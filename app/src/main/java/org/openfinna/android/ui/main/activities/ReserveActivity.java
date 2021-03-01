@@ -5,12 +5,15 @@
 
 package org.openfinna.android.ui.main.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,18 +33,28 @@ import org.openfinna.java.connector.classes.models.holds.PickupLocation;
 import org.openfinna.java.connector.interfaces.HoldsInterface;
 import org.openfinna.java.connector.interfaces.PickupLocationsInterface;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ReserveActivity extends KirkesActivity implements PickupLocationsInterface, HoldsInterface {
 
     private View error, progress, main, subProgress;
     private ResourceInfo bookInfo;
     private Button reserveBtn;
+    private EditText partText, comments, requiredBy;
+    private View comment, partName, requiredDate, loanType;
     private Spinner pickupLocationSpinner, typeSpinner;
     private ArrayAdapter<PickupLocation> arrayAdapter;
     private ArrayAdapter<HoldingDetails.HoldingType> typeArrayAdapter;
     private TextView notice;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private final Calendar requiredByDate = Calendar.getInstance();
+    private final SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,28 +76,72 @@ public class ReserveActivity extends KirkesActivity implements PickupLocationsIn
         reserveBtn = findViewById(R.id.reserveBtn);
         subProgress = findViewById(R.id.reserveProgress);
         pickupLocationSpinner = findViewById(R.id.pickupSpinner);
+        partText = findViewById(R.id.partText);
+        comments = findViewById(R.id.commentText);
+        requiredBy = findViewById(R.id.requiredByDate);
+        loanType = findViewById(R.id.loanType);
+        comment = findViewById(R.id.comment);
+        partName = findViewById(R.id.part);
+        requiredDate = findViewById(R.id.requiredBy);
         typeSpinner = findViewById(R.id.typeSpinner);
         swipeRefreshLayout = findViewById(R.id.swipeLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(false);
+            try {
+                fetchReservationDetails(bookInfo.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+                ErrorViewUtils.setError(e.getMessage(), error);
+            }
+        });
+        reserveBtn.setOnClickListener(v -> {
+            try {
+                reserve();
+            } catch (Exception e) {
+                e.printStackTrace();
+                snack(e.getMessage());
+            }
+        });
+
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
             @Override
-            public void onRefresh() {
-                try {
-                    fetchReservationDetails(bookInfo.getId());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    ErrorViewUtils.setError(e.getMessage(), error);
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                Calendar tempC = Calendar.getInstance();
+                tempC.setTime(requiredByDate.getTime());
+                tempC.set(Calendar.YEAR, year);
+                tempC.set(Calendar.MONTH, monthOfYear);
+                tempC.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                if (tempC.before(Calendar.getInstance())) {
+                    snack(getString(R.string.invalid_date));
+                    return;
+                }
+
+                requiredByDate.set(Calendar.YEAR, year);
+                requiredByDate.set(Calendar.MONTH, monthOfYear);
+                requiredByDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        requiredBy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    requiredBy.callOnClick();
                 }
             }
         });
-        reserveBtn.setOnClickListener(new View.OnClickListener() {
+
+        requiredBy.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                try {
-                    reserve();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    snack(e.getMessage());
-                }
+                new DatePickerDialog(ReserveActivity.this, date, requiredByDate
+                        .get(Calendar.YEAR), requiredByDate.get(Calendar.MONTH),
+                        requiredByDate.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         notice = findViewById(R.id.notice);
@@ -106,6 +163,11 @@ public class ReserveActivity extends KirkesActivity implements PickupLocationsIn
             }
         } else
             finish();
+    }
+
+    private void updateLabel() {
+
+        requiredBy.setText(format.format(requiredByDate.getTime()));
     }
 
     private void setTypeSpinnerListener() {
@@ -135,9 +197,21 @@ public class ReserveActivity extends KirkesActivity implements PickupLocationsIn
     private void reserve() {
         changeEditElementsState(false);
         subProgress.setVisibility(View.VISIBLE);
-        HoldingDetails.HoldingType reservationType = (HoldingDetails.HoldingType) typeSpinner.getSelectedItem();
+        HoldingDetails.HoldingType reservationType = null;
+        if (loanType.getVisibility() == View.VISIBLE) {
+            reservationType = (HoldingDetails.HoldingType) typeSpinner.getSelectedItem();
+        }
         PickupLocation pickupLocation = (PickupLocation) pickupLocationSpinner.getSelectedItem();
-        finnaClient.makeHold(this.bookInfo.getId(), pickupLocation, reservationType, this);
+        Date requiredBy = null;
+        if (requiredDate.getVisibility() == View.VISIBLE)
+            requiredBy = requiredByDate.getTime();
+        String part = null;
+        if (partName.getVisibility() == View.VISIBLE)
+            part = partText.getText().toString();
+        String commentText = null;
+        if (comment.getVisibility() == View.VISIBLE)
+            commentText = comments.getText().toString();
+        finnaClient.makeHold(this.bookInfo.getId(), pickupLocation, reservationType, commentText, part, requiredBy, this);
     }
 
     private void fetchReservationDetails(String resourceId) {
@@ -170,6 +244,20 @@ public class ReserveActivity extends KirkesActivity implements PickupLocationsIn
             public void run() {
                 progress.setVisibility(View.GONE);
                 subProgress.setVisibility(View.GONE);
+                requiredDate.setVisibility((holdingDetails.getDateSelectionValue() != null) ? View.VISIBLE : View.GONE);
+                if (holdingDetails.getDateSelectionValue() != null) {
+                    try {
+                        Date selectionValue = format.parse(holdingDetails.getDateSelectionValue());
+                        assert selectionValue != null;
+                        requiredByDate.setTime(selectionValue);
+                        requiredBy.setText(holdingDetails.getDateSelectionValue());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                loanType.setVisibility((!holdingDetails.getHoldingTypes().isEmpty()) ? View.VISIBLE : View.GONE);
+                comment.setVisibility(holdingDetails.isCommentsEnabled() ? View.VISIBLE : View.GONE);
+                partName.setVisibility(holdingDetails.isPartTextEnabled() ? View.VISIBLE : View.GONE);
                 setBookInfo();
                 changeEditElementsState(true);
                 arrayAdapter.clear();
@@ -179,6 +267,12 @@ public class ReserveActivity extends KirkesActivity implements PickupLocationsIn
                 typeArrayAdapter.addAll(holdingDetails.getHoldingTypes());
                 typeArrayAdapter.notifyDataSetChanged();
                 setTypeSpinnerListener();
+                for (PickupLocation loc : list) {
+                    if (loc.getId().equals(pickupLocation.getId())) {
+                        pickupLocationSpinner.setSelection(list.indexOf(loc));
+                        break;
+                    }
+                }
                 notice.setText(holdingDetails.getInfo());
                 main.setVisibility(View.VISIBLE);
             }

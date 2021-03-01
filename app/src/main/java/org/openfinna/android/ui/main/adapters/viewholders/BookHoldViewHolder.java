@@ -104,11 +104,16 @@ public class BookHoldViewHolder extends RecyclerView.ViewHolder {
                     listener.onBookClick(book);
                 }
             });
-        expireDate.setText(itemView.getContext().getString(R.string.order_date, dateFormat.format(book.getHoldDate())));
-        if (book.getHoldStatus() == HoldStatus.AVAILABLE) {
-            expireDate.setText(itemView.getContext().getString(R.string.last_pickup_day, dateFormat.format(book.getExpirationDate())));
-        } else {
-            expireDate.setText(itemView.getContext().getString(R.string.expiration_day, dateFormat.format(book.getExpirationDate())));
+        expireDate.setVisibility((book.getHoldDate() != null) ? View.VISIBLE : View.GONE);
+        if (book.getHoldDate() != null)
+            expireDate.setText(itemView.getContext().getString(R.string.order_date, dateFormat.format(book.getHoldDate())));
+        expireDate.setVisibility((book.getExpirationDate() != null) ? View.VISIBLE : View.GONE);
+        if (book.getExpirationDate() != null) {
+            if (book.getHoldStatus() == HoldStatus.AVAILABLE) {
+                expireDate.setText(itemView.getContext().getString(R.string.last_pickup_day, dateFormat.format(book.getExpirationDate())));
+            } else {
+                expireDate.setText(itemView.getContext().getString(R.string.expiration_day, dateFormat.format(book.getExpirationDate())));
+            }
         }
         mediaType.setText(itemView.getContext().getString(R.string.content_type, book.getResource().getType()));
 

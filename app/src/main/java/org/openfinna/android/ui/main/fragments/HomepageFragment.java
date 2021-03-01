@@ -127,7 +127,7 @@ public class HomepageFragment extends KirkesFragment implements HomepageNotifica
             for (final Hold book : holds) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
                 if (book.getHoldStatus() == HoldStatus.AVAILABLE)
-                    cards.add(new HomepageCard(getString(R.string.book_pickup_available), getString(R.string.book_pickup_available_details, book.getResource().getTitle(), dateFormat.format(book.getExpirationDate())), book, book.getResource().getImage(), HomepageCard.TYPE_NOTIFICATION));
+                    cards.add(new HomepageCard(getString(R.string.book_pickup_available), getString(R.string.book_pickup_available_details, book.getResource().getTitle(), ((book.getExpirationDate()!=null) ? dateFormat.format(book.getExpirationDate()) : "???")), book, book.getResource().getImage(), HomepageCard.TYPE_NOTIFICATION));
             }
             if (itemsUpdateTime() || forced) {
                 try {

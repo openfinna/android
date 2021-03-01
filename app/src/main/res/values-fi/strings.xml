@@ -166,4 +166,13 @@
     <string name="invalid_username_pass">Väärä kirjastokortin numero tai salasana</string>
     <string name="awards">Palkinnot</string>
     <string name="none">Ei mitään</string>
+    <string name="loan_renewed">Laina uusittiin</string>
+    <string name="loan_renewed_auto_msg">Laina %1$s uusittiin automaattisesti, koska sen eräpäivään oli jälellä %2$s %3$s.</string>
+    <string name="comments">Kommentit</string>
+    <string name="part_issue">Osa tai numero</string>
+    <string name="part_hint">esim. Osa 1</string>
+    <string name="comment_hint">esim. Pysäkki x</string>
+    <string name="alive_date">Viimeinen voimassaolopäivä</string>
+    <string name="requiredByDate">Klikkaa valitaksesi päivämäärän</string>
+    <string name="invalid_date">Päivämäärä ei voi olla menneisyydessä!</string>
 </resources>
