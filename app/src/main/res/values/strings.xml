@@ -165,6 +165,6 @@
     <string name="hold_status_change">Status changed for %1$s</string>
     <string name="app_settings">Application settings</string>
     <string name="invalid_username_pass">Invalid library card number or password</string>
-
-
+    <string name="awards">Awards</string>
+    <string name="none">None</string>
 </resources>

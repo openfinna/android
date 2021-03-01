@@ -41,8 +41,11 @@ public class KirkesActivity extends AppCompatActivity implements AuthenticationC
         super.onCreate(savedInstanceState);
         try {
             loginUser = AuthUtils.getAuthentication(this);
-            if (loginUser != null)
+            if (loginUser != null && !loginScreen) {
                 finnaClient = new FinnaClient(loginUser.getUserAuthentication(), this);
+                if (loginUser.getBuilding() != null)
+                    finnaClient.setCachedBuilding(loginUser.getBuilding());
+            }
             else
                 finnaClient = new FinnaClient(this);
         } catch (Exception e) {

@@ -7,7 +7,9 @@ package org.openfinna.android.ui.main.adapters.viewholders;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,10 +19,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.openfinna.android.R;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.squareup.picasso.Picasso;
 
 import org.openfinna.android.ui.main.adapters.ReservationAdapter;
@@ -155,6 +162,21 @@ public class BookHoldViewHolder extends RecyclerView.ViewHolder {
             queue.setTextColor(getContrastColor(color));
         }
 
+        Glide.with(itemView.getContext())
+                .asBitmap()
+                .load(book.getResource().getImage())
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        int width = resource.getWidth();
+                        int height = resource.getHeight();
+                        bookCover.setVisibility((width <= 10 && height <= 10) ? View.GONE : View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    }
+                });
         Picasso.get().load(book.getResource().getImage()).into(bookCover);
         if (index != -1)
             setAnimation2(itemView, index);

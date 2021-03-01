@@ -111,12 +111,7 @@ public class ReservationsFragment extends KirkesFragment implements LoansInterfa
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, GridSpacingItemDecoration.dpToPx(10, getContext()), true));
-        try {
-            loadReservations();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ErrorViewUtils.setError(e.getMessage(), errorView);
-        }
+
     }
 
     private void loadReservations() {
@@ -129,6 +124,17 @@ public class ReservationsFragment extends KirkesFragment implements LoansInterfa
     @Override
     public void onBookClick(Hold book) {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            loadReservations();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ErrorViewUtils.setError(e.getMessage(), errorView);
+        }
     }
 
     @Override
@@ -252,7 +258,6 @@ public class ReservationsFragment extends KirkesFragment implements LoansInterfa
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            swipeLayout.setRefreshing(true);
         }
 
         @Override
@@ -279,13 +284,11 @@ public class ReservationsFragment extends KirkesFragment implements LoansInterfa
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            swipeLayout.setRefreshing(true);
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            swipeLayout.setRefreshing(false);
         }
 
         @Override

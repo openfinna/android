@@ -92,6 +92,7 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
                 try {
                     loadPickupBooks();
                 } catch (Exception e) {
+                    Log.e("PBF", "1");
                     swipeLayout.setRefreshing(false);
                     e.printStackTrace();
                     snack(e.getMessage());
@@ -129,18 +130,13 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, GridSpacingItemDecoration.dpToPx(10, getContext()), true));
-        try {
-            loadPickupBooks();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ErrorViewUtils.setError(e.getMessage(), errorView);
-        }
+
     }
 
     private void loadPickupBooks() {
-        swipeLayout.setRefreshing(true);
         ErrorViewUtils.hideError(errorView);
         finnaClient.getHolds(this);
+        swipeLayout.setRefreshing(true);
     }
 
     @Override
@@ -149,6 +145,7 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
         requireActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                Log.e("PBF", "2");
                 swipeLayout.setRefreshing(false);
                 ErrorViewUtils.hideError(errorView);
                 recyclerView.setVisibility(View.VISIBLE);
@@ -181,6 +178,17 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            loadPickupBooks();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ErrorViewUtils.setError(e.getMessage(), errorView);
+        }
     }
 
     @Override
@@ -428,7 +436,6 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            swipeLayout.setRefreshing(true);
         }
 
         @Override
@@ -446,7 +453,6 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
         protected void onPostExecute(HomepageSavedResources s) {
             super.onPostExecute(s);
             if (getActivity() == null) return;
-            swipeLayout.setRefreshing(false);
             if (s == null) {
                 snack(getString(R.string.failed));
             } else {
@@ -464,7 +470,6 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            swipeLayout.setRefreshing(false);
         }
 
         @Override

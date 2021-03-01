@@ -21,8 +21,7 @@
         <ImageView
             android:id="@+id/bookCover"
             android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_height="130dp"
             android:layout_weight="0"
             android:adjustViewBounds="true"
             android:contentDescription="@string/book_cover"
@@ -33,6 +32,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -78,7 +78,11 @@
                 android:id="@+id/renew"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginRight="6dp"
                 android:layout_weight="0"
                 android:contentDescription="@string/renew"
                 android:tint="?attr/drawableColor"
@@ -88,6 +92,7 @@
                 android:id="@+id/renew_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="6dp"
                 android:layout_weight="0"
                 android:textStyle="italic"
                 tools:text="1/5" />

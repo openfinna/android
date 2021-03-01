@@ -52,8 +52,8 @@ public class LoginActivity extends KirkesActivity implements LoginInterface, Use
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         loginScreen = true;
+        super.onCreate(savedInstanceState);
         if (getIntent().getExtras() != null) {
             newAccount = getIntent().getBooleanExtra("newAccount", false);
             if (!newAccount) {
@@ -173,7 +173,8 @@ public class LoginActivity extends KirkesActivity implements LoginInterface, Use
             @Override
             public void run() {
                 loginProgress.setVisibility(View.GONE);
-                changeElementsState(true, true);
+                boolean typesLoaded = (userTypeArrayAdapter != null && userTypeArrayAdapter.getCount()>0);
+                changeElementsState(typesLoaded, typesLoaded);
                 if (e instanceof InvalidCredentialsException) {
                     snack(getString(R.string.invalid_username_pass));
                 } else {

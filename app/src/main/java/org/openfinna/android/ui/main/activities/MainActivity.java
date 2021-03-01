@@ -18,6 +18,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -130,7 +131,7 @@ public class MainActivity extends KirkesActivity {
         return true;
     }
 
-    private void showUsersDialog(final List<LoginUser> users) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, UnsupportedEncodingException {
+    private void showUsersDialog(final List<LoginUser> users) {
         @SuppressLint("InflateParams") View dialogView = getLayoutInflater().inflate(R.layout.users_dialog, null, false);
         LoginUser loginUser = AuthUtils.getAuthentication(this);
         TextView userName = dialogView.findViewById(R.id.currentUsername);
@@ -196,11 +197,13 @@ public class MainActivity extends KirkesActivity {
                 });
             }
         });
-
+        final AlertDialog[] dialog = new AlertDialog[1];
         final LibraryCardsAdapter cardAdapter = new LibraryCardsAdapter(new LibraryCardsAdapter.LibraryCardsActionsInterface() {
             @Override
             public void onCardClick(LoginUser user) {
                 AuthUtils.swapUser(user, MainActivity.this);
+                if (dialog[0] != null)
+                    dialog[0].dismiss();
                 recreate();
             }
 
@@ -224,14 +227,15 @@ public class MainActivity extends KirkesActivity {
             }
         }, users);
         otherAccounts.setAdapter(cardAdapter);
-        new MaterialAlertDialogBuilder(MainActivity.this).setView(dialogView).setNegativeButton(R.string.logout, null).setPositiveButton(R.string.add_card, new DialogInterface.OnClickListener() {
+        dialog[0] = new MaterialAlertDialogBuilder(MainActivity.this).setView(dialogView).setNegativeButton(R.string.logout, null).setPositiveButton(R.string.add_card, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
                 loginIntent.putExtra("newAccount", true);
                 startActivity(loginIntent);
             }
-        }).show().getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+        }).show();
+        dialog[0].getButton(DialogInterface.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialAlertDialogBuilder(MainActivity.this).setTitle(R.string.logout).setMessage(R.string.logout_disclaimer).setPositiveButton(R.string.logout, new DialogInterface.OnClickListener() {

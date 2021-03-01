@@ -186,6 +186,21 @@ public class InformationTab extends KirkesFragment {
         } else
             call_numbers.setText(R.string.not_available);
 
+        final TextView awards = view.findViewById(R.id.awards);
+
+        if (book.getAwards() != null && !book.getAwards().isEmpty()) {
+            StringBuilder cn_string = new StringBuilder();
+            int cn_size = book.getAwards().size() - 1;
+            for (String cn : book.getAwards()) {
+                int author_index = book.getAwards().indexOf(cn);
+                cn_string.append(cn);
+                if (author_index != cn_size)
+                    cn_string.append(", ");
+            }
+            awards.setText(cn_string.toString());
+        } else
+            awards.setText(R.string.none);
+
 
         final TextView isbn = view.findViewById(R.id.isbn);
         isbn.setOnClickListener(new View.OnClickListener() {

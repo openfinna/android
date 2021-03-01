@@ -83,18 +83,23 @@ public class LibraryInfoFragment extends KirkesFragment implements LibrariesInte
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, GridSpacingItemDecoration.dpToPx(10, getContext()), true));
-        try {
-            loadLibraryInfo();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ErrorViewUtils.setError(e.getMessage(), errorView);
-        }
     }
 
     private void loadLibraryInfo() throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, UnsupportedEncodingException {
         swipeLayout.setRefreshing(true);
         ErrorViewUtils.hideError(errorView);
         finnaClient.getLibraries(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            loadLibraryInfo();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ErrorViewUtils.setError(e.getMessage(), errorView);
+        }
     }
 
     @Override

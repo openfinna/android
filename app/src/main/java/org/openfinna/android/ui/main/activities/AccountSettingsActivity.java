@@ -93,7 +93,7 @@ public class AccountSettingsActivity extends KirkesActivity implements AccountDe
 
     private void changeDefaultPickupLocation(PickupLocation pickupLocation) {
         swipeLayout.setRefreshing(true);
-        updateUI(loginUser.getUser());
+        //updateUI(loginUser.getUser());
         finnaClient.getDefaultPickupLocation(this);
         finnaClient.changeDefaultPickupLocation(pickupLocation, new PickupLocationChangeInterface() {
             @Override
@@ -101,12 +101,12 @@ public class AccountSettingsActivity extends KirkesActivity implements AccountDe
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        swipeLayout.setRefreshing(false);
                         defaultLib.setEnabled(true);
                         ErrorViewUtils.hideError(error);
                         progress.setVisibility(View.GONE);
                         content.setVisibility(View.VISIBLE);
                         snack(getString(R.string.default_lib_changed));
+                        finnaClient.getDefaultPickupLocation(AccountSettingsActivity.this);
                     }
                 });
             }
@@ -201,6 +201,7 @@ public class AccountSettingsActivity extends KirkesActivity implements AccountDe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                swipeLayout.setRefreshing(false);
                 progress.setVisibility(View.GONE);
                 content.setVisibility(View.VISIBLE);
                 setDefLib(pickupLocation, list);

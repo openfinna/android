@@ -19,7 +19,9 @@ import androidx.fragment.app.Fragment;
 import org.openfinna.android.BuildConfig;
 import org.openfinna.android.R;
 import org.openfinna.android.classes.LoginUser;
+import org.openfinna.android.ui.main.activities.KirkesActivity;
 import org.openfinna.android.ui.utils.AuthUtils;
+import org.openfinna.java.OpenFinna;
 import org.openfinna.java.connector.FinnaClient;
 import org.openfinna.java.connector.classes.UserAuthentication;
 import org.openfinna.java.connector.classes.models.User;
@@ -40,11 +42,9 @@ public class KirkesFragment extends Fragment implements AuthenticationChangeList
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            loginUser = AuthUtils.getAuthentication(requireActivity());
-            if (loginUser != null)
-                finnaClient = new FinnaClient(loginUser.getUserAuthentication(), this);
-            else
-                finnaClient = new FinnaClient(this);
+            finnaClient = ((KirkesActivity)requireActivity()).finnaClient;
+            if (finnaClient == null)
+                finnaClient = OpenFinna.newClient();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -7,6 +7,8 @@ package org.openfinna.android.ui.main.adapters.viewholders;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,10 +17,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.openfinna.android.R;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -90,6 +96,21 @@ public class BookReservationViewHolder extends RecyclerView.ViewHolder {
         renew_count.setVisibility((book.getRenewsUsed() != 0) ? View.VISIBLE : View.GONE);
         if (book.getRenewsUsed() != 0)
             renew_count.setText(itemView.getContext().getString(R.string.renew_count, String.valueOf(book.getRenewsUsed()), String.valueOf(book.getRenewsTotal())));
+        Glide.with(itemView.getContext())
+                .asBitmap()
+                .load(book.getResource().getImage())
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        int width = resource.getWidth();
+                        int height = resource.getHeight();
+                        bookCover.setVisibility((width <= 10 && height <= 10) ? View.GONE : View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    }
+                });
         Picasso.get().load(book.getResource().getImage()).into(bookCover);
         //setAnimation2(itemView, index);
     }

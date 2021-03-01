@@ -164,5 +164,6 @@
     <string name="hold_status_change">Tila muuttunut tilaukselle %1$s</string>
     <string name="app_settings">Sovellusasetukset</string>
     <string name="invalid_username_pass">Väärä kirjastokortin numero tai salasana</string>
-
+    <string name="awards">Palkinnot</string>
+    <string name="none">Ei mitään</string>
 </resources>

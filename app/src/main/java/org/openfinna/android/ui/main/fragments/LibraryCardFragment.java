@@ -64,7 +64,7 @@ public class LibraryCardFragment extends KirkesFragment {
 
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             try {
-                BitMatrix bitMatrix = multiFormatWriter.encode(user.getUserAuthentication().getUsername(), BarcodeFormat.CODE_39, 900, 120);
+                BitMatrix bitMatrix = multiFormatWriter.encode(user.getUserAuthentication().getUsername(), BarcodeFormat.CODE_39, 2000, 200);
                 BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                 Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
                 barcode.setImageBitmap(bitmap);
