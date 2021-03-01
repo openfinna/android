@@ -106,16 +106,13 @@ public class AuthUtils {
         String activeUser = storageVault.getEncryptedInfo("activeUser");
         try {
             if (alreadyLoggedIn(context)) {
-                Log.e("AU", activeUser);
                 if (activeUser == null) {
                     return usersDb.getUsers().get(0);
                 } else {
                     return usersDb.getUser(activeUser);
                 }
-            } else
-                Log.e("AU", "NLI!");
+            }
         } catch (Exception e) {
-            Log.e("AU", e.getMessage());
             e.printStackTrace();
         }
         return null;

@@ -72,7 +72,6 @@ public class HomepageNotificationViewHolder extends RecyclerView.ViewHolder {
             button.setLayoutParams(params);
 
             buttons.addView(button);
-            Log.e("HNFVH", "Action " + action.getActionID() + " added");
         }
 
     }

@@ -104,7 +104,6 @@ public class ReservationsFragment extends KirkesFragment implements LoansInterfa
             }
 
             void checkEmpty() {
-                Log.e("RF", "CheckEmpty");
                 no_reservations_view.setVisibility(adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
                 recyclerView.setVisibility(adapter.getItemCount() == 0 ? View.GONE : View.VISIBLE);
             }

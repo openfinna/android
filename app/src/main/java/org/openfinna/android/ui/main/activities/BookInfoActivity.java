@@ -87,7 +87,6 @@ public class BookInfoActivity extends KirkesActivity implements ResourceInfoInte
                 } else {
                     resourceId = resourceInfo.getId();
                 }
-                Log.e("RID", "RID: " + resourceId);
                 finnaClient.resourceInfo(resourceId, BookInfoActivity.this);
             }
         });

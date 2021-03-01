@@ -71,7 +71,6 @@ public class BookReservationViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(final Loan book, int index, final ReservationAdapter.BookActionsInterface listener) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-        Log.e("BR", new Gson().toJson(book));
         bookName.setText(book.getResource().getTitle());
         bookAuthor.setText(book.getResource().getAuthor());
         renew.setOnClickListener(new View.OnClickListener() {

@@ -41,7 +41,6 @@ public class KirkesFragment extends Fragment implements AuthenticationChangeList
         super.onCreate(savedInstanceState);
         try {
             loginUser = AuthUtils.getAuthentication(requireActivity());
-            Log.e("KA2", new Gson().toJson(loginUser));
             if (loginUser != null)
                 finnaClient = new FinnaClient(loginUser.getUserAuthentication(), this);
             else

@@ -137,7 +137,6 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
                             });
                             if (library.getImages() != null && !library.getImages().isEmpty()) {
                                 libraryImage.setVisibility(View.VISIBLE);
-                                Log.e("LVH", library.getImages().get(0).getUrl());
                                 Picasso.get().load(library.getImages().get(0).getUrl()).into(libraryImage);
                             }
                         }

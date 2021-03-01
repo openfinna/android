@@ -125,7 +125,6 @@ public class BookHoldViewHolder extends RecyclerView.ViewHolder {
                 listener.onReservationEdit(book);
             }
         });
-        Log.e("BHVH", "Cancel possible: " + book.isCancellable());
         cancel.setVisibility(book.isCancellable() ? View.VISIBLE : View.GONE);
         edit.setVisibility(book.isCancellable() ? View.VISIBLE : View.GONE);
         reservation_number.setVisibility(book.getHoldStatus() == HoldStatus.AVAILABLE ? View.VISIBLE : View.GONE);

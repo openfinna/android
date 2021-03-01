@@ -96,7 +96,6 @@ public class SearchActivity extends KirkesActivity implements SearchInterface, B
                             if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                                 try {
                                     page++;
-                                    Log.e("SA", "Page: " + page);
                                     loadingCurrently = true;
                                     search(query);
                                 } catch (Exception e) {

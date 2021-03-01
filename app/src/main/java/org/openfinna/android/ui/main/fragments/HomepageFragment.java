@@ -333,12 +333,10 @@ public class HomepageFragment extends KirkesFragment implements HomepageNotifica
     }
 
     private void refreshPickupBooks() throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, UnsupportedEncodingException {
-        Log.e("HF", "refres");
         finnaClient.getHolds(this);
     }
 
     private void refreshReservedBooks() throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, NoSuchProviderException, UnsupportedEncodingException {
-        Log.e("HF", "refres2");
         finnaClient.getLoans(this);
     }
 

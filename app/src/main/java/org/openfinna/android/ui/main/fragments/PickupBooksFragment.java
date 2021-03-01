@@ -122,7 +122,6 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
             }
 
             void checkEmpty() {
-                Log.e("RF", "CheckEmpty");
                 no_orders_layout.setVisibility(adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
                 recyclerView.setVisibility(adapter.getItemCount() == 0 ? View.GONE : View.VISIBLE);
             }
@@ -255,7 +254,6 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                Log.e("OBF", "CLICK");
                 final ProgressDialog progressDialog = new ProgressDialog(getContext());
                 progressDialog.setMessage(getString(R.string.canceling_reservation));
                 progressDialog.show();

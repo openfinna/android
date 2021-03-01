@@ -45,7 +45,6 @@ public class BibBookViewHolder extends RecyclerView.ViewHolder {
         for (Author bookAuthor : book.getAuthors()) {
             int author_index = book.getAuthors().indexOf(bookAuthor);
             authors.append(bookAuthor.getName().replace(",", ""));
-            Log.e("BBVH", "I:" + author_index + "EI:" + authors_size);
             if (author_index != authors_size)
                 authors.append(", ");
         }

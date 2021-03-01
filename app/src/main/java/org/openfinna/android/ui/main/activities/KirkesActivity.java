@@ -39,10 +39,8 @@ public class KirkesActivity extends AppCompatActivity implements AuthenticationC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("KA", "k");
         try {
             loginUser = AuthUtils.getAuthentication(this);
-            Log.e("KA", new Gson().toJson(loginUser));
             if (loginUser != null)
                 finnaClient = new FinnaClient(loginUser.getUserAuthentication(), this);
             else
