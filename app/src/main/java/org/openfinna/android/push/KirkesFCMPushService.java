@@ -10,6 +10,12 @@ import androidx.annotation.NonNull;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.openfinna.android.classes.LoginUser;
+import org.openfinna.android.ui.utils.db.users.UsersDb;
+
+import java.util.List;
+import java.util.Objects;
+
 public class KirkesFCMPushService extends FirebaseMessagingService {
 
     public static final String SENDER_ID = "701692030799";
@@ -17,7 +23,7 @@ public class KirkesFCMPushService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-      /*  log("Message received!");
+    /*    log("Message received!");
         log("Sender: " + remoteMessage.getFrom());
         log("Data: " + new Gson().toJson(remoteMessage.getData().toString()));
 
@@ -25,10 +31,11 @@ public class KirkesFCMPushService extends FirebaseMessagingService {
         if (!Objects.equals(remoteMessage.getFrom(), SENDER_ID))
             return;
         UsersDb db = new UsersDb(this);
-        if (remoteMessage.getData().containsKey("data_refresh") && remoteMessage.getData().containsKey("user")) {
+        if (remoteMessage.getData().containsKey("data_refresh")) {
             String user = remoteMessage.getData().get("user");
             try {
-                LoginUser loginUser = db.getUserUsingTokenHash(user);
+                List<LoginUser>
+                LoginUser loginUser = db.getUser(user);
                 if (loginUser != null) {
                     checkForNotification(loginUser);
                 }
@@ -39,7 +46,7 @@ public class KirkesFCMPushService extends FirebaseMessagingService {
 
     }
 
-   /* private void checkForNotification(final LoginUser loginUser) {
+  /* private void checkForNotification(final LoginUser loginUser) {
         final HomepageSavedResources resources = AuthUtils.getHomepage(this, loginUser);
         final List<Loan> loans = new ArrayList<>();
         final List<Hold> holds = new ArrayList<>();
