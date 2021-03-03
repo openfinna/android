@@ -25,6 +25,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.openfinna.android.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.gson.Gson;
 
 import org.openfinna.android.classes.HomepageAction;
 import org.openfinna.android.classes.HomepageCard;

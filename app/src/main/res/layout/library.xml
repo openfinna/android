@@ -24,7 +24,7 @@
         <ImageView
             android:id="@+id/libraryImage"
             android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:contentDescription="@string/book_cover"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
@@ -58,6 +58,16 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 tools:text="14:00-18:00" />
+
+
+            <TextView
+                android:id="@+id/selfServiceOpeningTimes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:visibility="gone"
+                tools:text="Self-service: 14:00-18:00"
+                tools:visibility="visible" />
 
         </LinearLayout>
     </LinearLayout>

@@ -5,11 +5,14 @@
 
 package org.openfinna.android.ui.main.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
 
 import org.openfinna.android.R;
 
@@ -24,6 +27,10 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryViewHolder> {
     private List<Library> libraries;
     private SelectListener listener;
     private FinnaClient finnaClient;
+
+    public interface UpdateListener {
+        void onUpdate(Library library, int pos);
+    }
 
     public LibraryAdapter(List<Library> libraries, FinnaClient finnaClient) {
         this.libraries = libraries;
@@ -44,7 +51,10 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull LibraryViewHolder holder, int position) {
-        holder.onBind(libraries.get(position), position);
+        holder.onBind(libraries.get(position), position, (library, pos) -> {
+            Log.e("LA", new Gson().toJson(library.getImages()));
+            libraries.set(pos, library);
+        });
     }
 
     @Override

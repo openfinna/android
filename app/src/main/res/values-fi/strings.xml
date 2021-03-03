@@ -175,4 +175,6 @@
     <string name="alive_date">Viimeinen voimassaolopäivä</string>
     <string name="requiredByDate">Klikkaa valitaksesi päivämäärän</string>
     <string name="invalid_date">Päivämäärä ei voi olla menneisyydessä!</string>
+    <string name="only_selfservice">Vain itsepalvelu</string>
+    <string name="lib_open_times_selfservice">Itsepalvelu: %1$s</string>
 </resources>

@@ -62,6 +62,7 @@
     <string name="lib_open">Open</string>
     <string name="lib_closed">Closed</string>
     <string name="lib_open_times" translatable="false">%1$s-%2$s</string>
+    <string name="lib_open_times_selfservice">Self-service: %1$s</string>
     <string name="add_library">Set your local library</string>
     <string name="add_library_desc">You can receive updates and opening times about your local library</string>
     <string name="set_library">Set library</string>
@@ -176,4 +177,5 @@
     <string name="alive_date">Required until</string>
     <string name="requiredByDate">Click to select date</string>
     <string name="invalid_date">Date cannot be in past!</string>
+    <string name="only_selfservice">Only self-service</string>
 </resources>

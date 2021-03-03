@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang.StringUtils;
 import org.openfinna.android.R;
 
 import com.google.gson.Gson;
@@ -28,19 +29,22 @@ import org.openfinna.android.ui.main.adapters.LibraryAdapter;
 import org.openfinna.java.connector.FinnaClient;
 import org.openfinna.java.connector.classes.models.libraries.Library;
 import org.openfinna.java.connector.classes.models.libraries.schedule.Day;
+import org.openfinna.java.connector.classes.models.libraries.schedule.SelfServicePeriod;
 import org.openfinna.java.connector.interfaces.LibrariesInterface;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 public class LibraryViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView libraryName, libraryCurrentlyOpen, todayOpeningTimesText;
+    private TextView libraryName, libraryCurrentlyOpen, todayOpeningTimesText, selfServiceOpeningTimes;
     private ImageView libraryImage;
     private LibraryAdapter.SelectListener listener;
     private int lastPosition = -1;
@@ -53,6 +57,7 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
         libraryCurrentlyOpen = itemView.findViewById(R.id.libraryCurrentlyOpen);
         todayOpeningTimesText = itemView.findViewById(R.id.todayOpeningTimes);
         libraryImage = itemView.findViewById(R.id.libraryImage);
+        selfServiceOpeningTimes = itemView.findViewById(R.id.selfServiceOpeningTimes);
         this.listener = listener;
         this.finnaClient = finnaClient;
     }
@@ -81,7 +86,7 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    public void onBind(final Library library, int index) {
+    public void onBind(final Library library, int index, LibraryAdapter.UpdateListener updateListener) {
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +96,7 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
             }
         });
         libraryName.setText(library.getName());
-        Day todayOpeningTimes = new Day(new Date(), true, null);
+        Day todayOpeningTimes = new Day(new Date(), true, null, new ArrayList<>());
         for (Day today : library.getDays()) {
             Calendar todayC = Calendar.getInstance();
             todayC.setTime(today.getDate());
@@ -102,21 +107,32 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
-        libraryCurrentlyOpen.setText(!todayOpeningTimes.isClosed() ? itemView.getContext().getString(R.string.lib_open) : itemView.getContext().getString(R.string.lib_closed));
+        libraryCurrentlyOpen.setText(library.isCurrentlyOpen() ? itemView.getContext().getString(R.string.lib_open) : itemView.getContext().getString(R.string.lib_closed));
 
         if (todayOpeningTimes.getSchedule() == null || todayOpeningTimes.isClosed() || todayOpeningTimes.getSchedule().getOpens() == null)
             todayOpeningTimesText.setVisibility(View.GONE);
         else {
             todayOpeningTimesText.setVisibility(View.VISIBLE);
-
+            selfServiceOpeningTimes.setVisibility((!todayOpeningTimes.getSelfServicePeriods().isEmpty()||todayOpeningTimes.getSchedule().isSelfService()) ? View.VISIBLE : View.GONE);
+            if (!todayOpeningTimes.getSelfServicePeriods().isEmpty()) {
+                List<String> periodTexts = new LinkedList<>();
+                for (SelfServicePeriod period : todayOpeningTimes.getSelfServicePeriods()) {
+                    Log.e("LVH", new Gson().toJson(period));
+                    periodTexts.add(itemView.getContext().getString(R.string.lib_open_times, simpleDateFormat.format(period.getStart()), simpleDateFormat.format(period.getEnd())));
+                }
+                selfServiceOpeningTimes.setText(itemView.getContext().getString(R.string.lib_open_times_selfservice, StringUtils.join(periodTexts, ",")));
+            } else if (todayOpeningTimes.getSchedule().isSelfService()) {
+                selfServiceOpeningTimes.setText(itemView.getContext().getString(R.string.only_selfservice));
+            }
             todayOpeningTimesText.setText(itemView.getContext().getString(R.string.lib_open_times, simpleDateFormat.format(todayOpeningTimes.getSchedule().getOpens()), simpleDateFormat.format(todayOpeningTimes.getSchedule().getCloses())));
         }
         libraryImage.setVisibility(View.VISIBLE);
         libraryImage.setVisibility(View.GONE);
 
-        if (library.getImages() != null && !library.getImages().isEmpty())
+        if (library.getImages() != null && !library.getImages().isEmpty()) {
+            libraryImage.setVisibility(View.VISIBLE);
             Picasso.get().load(library.getImages().get(0).getUrl()).into(libraryImage);
-        else {
+        } else {
             finnaClient.getLibrary(library, new LibrariesInterface() {
                 @Override
                 public void onGetLibraries(List<Library> list) {
@@ -124,7 +140,7 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
                 }
 
                 @Override
-                public void onGetLibrary(Library library) {
+                public void onGetLibrary(Library detailsLib) {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
@@ -132,12 +148,13 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
                                 @Override
                                 public void onClick(View v) {
                                     if (listener != null)
-                                        listener.onSelect(library);
+                                        listener.onSelect(detailsLib);
                                 }
                             });
-                            if (library.getImages() != null && !library.getImages().isEmpty()) {
+                            if (detailsLib.getImages() != null && !detailsLib.getImages().isEmpty()) {
                                 libraryImage.setVisibility(View.VISIBLE);
-                                Picasso.get().load(library.getImages().get(0).getUrl()).into(libraryImage);
+                                Picasso.get().load(detailsLib.getImages().get(0).getUrl()).into(libraryImage);
+                                updateListener.onUpdate(detailsLib, index);
                             }
                         }
                     });
