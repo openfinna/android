@@ -10,6 +10,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
@@ -193,7 +194,7 @@ public class KirkesFCMPushService extends FirebaseMessagingService {
 
                         resources.setReservedBooks(loanList);
                         resources.setPickupBooks(holdList);
-                        new SaveItemsTask(loginUser).execute(resources);
+                        new SaveItemsTask(loginUser).execute(new HomepageSavedResources(holdList, loanList, resources.getSelectedLibrary(), resources.isLibrarySelected(), resources.isLibraryOptOut()));
                     }
 
                     @Override
