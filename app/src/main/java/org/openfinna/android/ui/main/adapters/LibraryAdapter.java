@@ -52,7 +52,6 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull LibraryViewHolder holder, int position) {
         holder.onBind(libraries.get(position), position, (library, pos) -> {
-            Log.e("LA", new Gson().toJson(library.getImages()));
             libraries.set(pos, library);
         });
     }

@@ -117,7 +117,6 @@ public class LibraryViewHolder extends RecyclerView.ViewHolder {
             if (!todayOpeningTimes.getSelfServicePeriods().isEmpty()) {
                 List<String> periodTexts = new LinkedList<>();
                 for (SelfServicePeriod period : todayOpeningTimes.getSelfServicePeriods()) {
-                    Log.e("LVH", new Gson().toJson(period));
                     periodTexts.add(itemView.getContext().getString(R.string.lib_open_times, simpleDateFormat.format(period.getStart()), simpleDateFormat.format(period.getEnd())));
                 }
                 selfServiceOpeningTimes.setText(itemView.getContext().getString(R.string.lib_open_times_selfservice, StringUtils.join(periodTexts, ",")));

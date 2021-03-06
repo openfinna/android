@@ -92,7 +92,6 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
                 try {
                     loadPickupBooks();
                 } catch (Exception e) {
-                    Log.e("PBF", "1");
                     swipeLayout.setRefreshing(false);
                     e.printStackTrace();
                     snack(e.getMessage());
@@ -145,7 +144,6 @@ public class PickupBooksFragment extends KirkesFragment implements HoldsInterfac
         requireActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.e("PBF", "2");
                 swipeLayout.setRefreshing(false);
                 ErrorViewUtils.hideError(errorView);
                 recyclerView.setVisibility(View.VISIBLE);

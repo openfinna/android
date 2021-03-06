@@ -262,7 +262,6 @@ public class MainActivity extends KirkesActivity {
         protected String doInBackground(String... homepageSavedResources) {
             try {
                 String token = FirebaseInstanceId.getInstance().getToken(KirkesFCMPushService.SENDER_ID, "GCM");
-                Log.e(TAG, "Token: " + token);
                 PushAPIUtils.getAPIService().sendPushKey(token).execute();
             } catch (Exception e) {
                 e.printStackTrace();
