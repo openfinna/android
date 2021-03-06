@@ -6,5 +6,7 @@ The client uses [OpenFinna java](https://github.com/openfinna/java) library.
      alt="Get it on Google Play"
      height="80">](https://play.google.com/store/apps/details?id=org.openfinna.android)
 
+**NO personal data is transferred to any server anywhere, all requests happen on-device, directly to finna**
+
 ## To-Do
 - [x] Fix push notifications
